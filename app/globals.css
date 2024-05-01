@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
+
+/* styles.css */
+.bordered-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.bordered-table th,
+.bordered-table td {
+  border-bottom: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+.bordered-table th {
+  background-color: #f2f2f2;
+}
+
+/* Tabs.css */
+.tabs {
+  display: flex;
+}
+.tab {
+  padding: 10px 15px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  background-color: #f0f0f0;
+  color: #666666d9;
+}
+.tab:last-child {
+  margin-right: 0;
+}
+.tab.active {
+  background-color: #111111d9;
+  border-bottom: 1px solid #ccc;
+  color: #ffffff;
+}
+.tab-content {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 0 5px 5px 5px;
+}
+
+/* Lotus story Info */
+.lotus-store {
+  width: 48%;
+  padding: 20px;
+}
+@media (max-width: 768px) {
+  .lotus-stores-container {
+    flex-direction: column;
+  }
+  .lotus-store {
+    width: 100%;
+  }
+}
+
+.Button {
+  font-family: "DIN-Light";
+  font-weight: normal;
+}
