@@ -175,10 +175,10 @@ export default function ReservationPage() {
   };
 
   return (
-    <div className="m-20">
+    <div className="lg: m-15 md: m-10">
       {/* <ConfirmationModal open={open} name={name} phoneNum={phoneNum} email={email} people={people} branch={branch} selectedDate={selectedDate} selectedTime={selectedTime} option={option} orders={orders}/> */}
 
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <div className="tabs">
           {tabs.map((tab, index) => (
             <div
@@ -191,11 +191,11 @@ export default function ReservationPage() {
           ))}
         </div>
       </div>
-      <div>
+      <div className="w-full">
         {tabs[activeTab].Menu.map((menuGroup, groupIndex) => (
           <div key={groupIndex}>
             <h4 className="text-xl font-extrabold mt-5">{menuGroup?.label}</h4>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap ">
               {menuGroup?.menus.map((menuItem, itemIndex) => (
                 <div
                   key={itemIndex}

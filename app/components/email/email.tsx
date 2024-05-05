@@ -84,8 +84,6 @@ export function EmailForm({
       setTimeError("");
     }
 
-    setIsSucModalOpen(true);
-
     if (
       name != "" &&
       phoneNum.match(/^\d*$/) &&
@@ -102,24 +100,24 @@ export function EmailForm({
         console.log("open confirm");
       } else {
         try {
-          // await fetch("/api/email", {
-          //   method: "POST",
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
+          await fetch("/api/email", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
 
-          //   body: JSON.stringify({
-          //     name,
-          //     phoneNum,
-          //     email,
-          //     people,
-          //     branch,
-          //     selectedDate,
-          //     selectedTime,
-          //     orders,
-          //     option,
-          //   }),
-          // });
+            body: JSON.stringify({
+              name,
+              phoneNum,
+              email,
+              people,
+              branch,
+              selectedDate,
+              selectedTime,
+              orders,
+              option,
+            }),
+          });
           setName("");
           setPhoneNum("");
           setEmail("");
@@ -132,6 +130,7 @@ export function EmailForm({
         } catch (e) {
           console.error(e);
         }
+
         console.log("Send Email");
       }
     } else {
@@ -169,12 +168,21 @@ export function EmailForm({
         name={name}
         phoneNum={phoneNum}
         email={email}
-        people={1}
+        people={people}
         branch={branch}
         selectedDate={selectedDate}
         selectedTime={selectedTime}
         option={option}
         orders={orders}
+        setName={setName}
+        setPhoneNum={setPhoneNum}
+        setEmail={setEmail}
+        setPeople={setPeople}
+        setBranch={setBranch}
+        setSelectedDate={setSelectedDate}
+        setSelectedTime={setSelectedTime}
+        setOption={setOption}
+        setIsSucModalOpen={setIsSucModalOpen}
       />
       <SuccessModal isOpen={isSucModalOpen} setIsOpen={setIsSucModalOpen} />
 

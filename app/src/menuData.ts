@@ -365,6 +365,7 @@ export const coffee_menu = [
       },
       {
         name: "VIET ICED COFFEE",
+        description: "",
         price: "6",
         sub_price: "",
         count: 0,
@@ -373,6 +374,7 @@ export const coffee_menu = [
       },
       {
         name: "SOFT DRINK",
+        description: "",
         price: "4.5",
         sub_price: "",
         count: 0,
@@ -381,6 +383,7 @@ export const coffee_menu = [
       },
       {
         name: "BEERS: ASAHI / HEINEKEN",
+        description: "",
         price: "8",
         sub_price: "",
         count: 0,

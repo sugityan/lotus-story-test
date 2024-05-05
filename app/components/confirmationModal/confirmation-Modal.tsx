@@ -9,8 +9,33 @@ interface Props {
 }
 
 const style = {
-  width: 400,
-  height: 400,
+  width: "80vw",
+  height: "50vh",
+  position: "absolute",
+  top: "30%",
+  left: "10%",
+  border: "2px solid #000",
+  boxShadow: "md",
+  padding: 4,
+  overflowY: "scroll",
+  backgroundColor: "white",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  animation:
+    "text-pop-up-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+  "@keyframes text-pop-up-top": {
+    "0%": {
+      transform: "translateY(0)",
+      transformOrigin: "50% 50%",
+      textShadow: "none",
+    },
+    to: {
+      transform: "translateY(-50px)",
+      transformOrigin: "50% 50%",
+    },
+  },
 };
 
 export default function ConfirmationModal({
@@ -25,18 +50,36 @@ export default function ConfirmationModal({
   selectedTime,
   option,
   orders,
+  setName,
+  setPhoneNum,
+  setEmail,
+  setPeople,
+  setBranch,
+  setSelectedDate,
+  setSelectedTime,
+  setOption,
+  setIsSucModalOpen,
 }: {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   name: string;
   email: string;
   phoneNum: string;
-  people: number;
+  people: string;
   branch: string;
   selectedDate: any;
   selectedTime: any;
   option: string;
   orders: { name: string; count: number; option: string }[];
+  setName: (value: string) => void;
+  setPhoneNum: (value: string) => void;
+  setEmail: (value: string) => void;
+  setPeople: (value: string) => void;
+  setBranch: (value: string) => void;
+  setSelectedDate: (value: any) => void;
+  setSelectedTime: (value: any) => void;
+  setOption: (value: string) => void;
+  setIsSucModalOpen: (value: boolean) => void;
 }) {
   const DisplayProperty: React.FC<Props> = ({ property }) => {
     return (
@@ -66,11 +109,15 @@ export default function ConfirmationModal({
           option,
         }),
       });
-      // setName("");
-      // setPhoneNum("");
-      // setEmail("");
-      // setPeople("");
-      // setOption("");
+      setName("");
+      setPhoneNum("");
+      setEmail("");
+      setPeople("");
+      setBranch("");
+      setSelectedDate("");
+      setSelectedTime("");
+      setOption("");
+      setIsSucModalOpen(true);
     } catch (e) {
       console.error(e);
     }
@@ -91,10 +138,10 @@ export default function ConfirmationModal({
       >
         <Box
           sx={style}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-black shadow-md p-4  overflow-y-scroll bg-white"
+          // className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-black shadow-md p-4  overflow-y-scroll bg-white"
         >
           <div className="font-bold text-center pb-2 border-b mb-2 overflow-y-scroll">
-            <div className="py-12">
+            <div className="">
               <div className="">
                 <div className="text-center">
                   <h2 className="text-3xl bg-gray-900 font-extrabold text-white">

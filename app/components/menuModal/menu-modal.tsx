@@ -59,18 +59,22 @@ export default function MenuModal({
                 {truncate(name, 8)}
               </h2>
               <p className="text-gray-500 text-left text-black">
-                {truncate(description, 18)}
+                {description != null ? truncate(description, 18) : ""}
               </p>
             </div>
             <p className="text-sm text-black">${price}</p>
           </div>
 
-          <div className="flex flex-col h-full">
-            <img
-              src={imageSrc}
-              // alt="Image description"
-              className="w-auto h-full"
-            />
+          <div className="flex flex-col h-full justify-center">
+            {imageSrc != "" ? (
+              <img
+                src={imageSrc}
+                // alt="Image description"
+                className="w-32 h-32"
+              />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </Button>
