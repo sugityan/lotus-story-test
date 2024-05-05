@@ -94,3 +94,9 @@ body {
   font-family: "DIN-Light";
   font-weight: normal;
 }
+
+@media (max-width: 676px) {
+  .contact-margin {
+    margin-top: 30px;
+  }
+}

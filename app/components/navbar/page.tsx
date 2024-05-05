@@ -80,16 +80,6 @@ export default function Navbar() {
                 </Disclosure.Button>
               ))}
             </div>
-            <div className="border-t border-gray-200 pt-4 pb-3">
-              <div className="mt-3 space-y-1">
-                <button
-                  onClick={() => signIn("github")}
-                  className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                >
-                  Sign in
-                </button>
-              </div>
-            </div>
           </Disclosure.Panel>
         </>
       )}

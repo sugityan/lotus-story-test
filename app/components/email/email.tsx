@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
-import ConfirmationModal from "../confirmationModal/confirmation-Modal";
+import ConfirmationModal from "../confirmationModal/confirmation-modal";
+import SuccessModal from "../successModal/success-modal";
 
 export function EmailForm({
   isConfirm,
@@ -22,9 +23,12 @@ export function EmailForm({
   const [branch, setBranch] = useState("");
   const [branchError, setBranchError] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
+  const [dateError, setDateError] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const [timeError, setTimeError] = useState("");
   const [option, setOption] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isConModalOpen, setIsConModalOpen] = useState(false);
+  const [isSucModalOpen, setIsSucModalOpen] = useState(false);
 
   const handleTimeChange = (time: any) => {
     setSelectedTime(time.target.value);
@@ -68,19 +72,66 @@ export function EmailForm({
       setBranchError("");
     }
 
+    if (selectedDate == "") {
+      setDateError("There is a field that the sender must fill in");
+    } else {
+      setDateError("");
+    }
+
+    if (selectedTime == "") {
+      setTimeError("There is a field that the sender must fill in");
+    } else {
+      setTimeError("");
+    }
+
+    setIsSucModalOpen(true);
+
     if (
       name != "" &&
       phoneNum.match(/^\d*$/) &&
       phoneNum != "" &&
       email != "" &&
       people != "" &&
-      branch != ""
+      branch != "" &&
+      selectedDate != "" &&
+      selectedTime != ""
     ) {
       console.log("ok");
       if (isConfirm) {
-        setIsOpen(true);
+        setIsConModalOpen(true);
         console.log("open confirm");
       } else {
+        try {
+          // await fetch("/api/email", {
+          //   method: "POST",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+
+          //   body: JSON.stringify({
+          //     name,
+          //     phoneNum,
+          //     email,
+          //     people,
+          //     branch,
+          //     selectedDate,
+          //     selectedTime,
+          //     orders,
+          //     option,
+          //   }),
+          // });
+          setName("");
+          setPhoneNum("");
+          setEmail("");
+          setPeople("");
+          setBranch("");
+          setSelectedDate("");
+          setSelectedTime("");
+          setOption("");
+          setIsSucModalOpen(true);
+        } catch (e) {
+          console.error(e);
+        }
         console.log("Send Email");
       }
     } else {
@@ -88,11 +139,33 @@ export function EmailForm({
     }
   }
 
+  function ErrorMsg({ error }: { error: string }) {
+    return (
+      <div className="flex items-center bg-gray-200 rounded-md p-2 mt-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4 text-red-500 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+          />
+        </svg>
+        <p className="text-red-500 text-sm mt-2">{error}</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="py-12">
+    <div>
       <ConfirmationModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        isOpen={isConModalOpen}
+        setIsOpen={setIsConModalOpen}
         name={name}
         phoneNum={phoneNum}
         email={email}
@@ -103,6 +176,7 @@ export function EmailForm({
         option={option}
         orders={orders}
       />
+      <SuccessModal isOpen={isSucModalOpen} setIsOpen={setIsSucModalOpen} />
 
       <div className="">
         <div className="text-center">
@@ -117,128 +191,110 @@ export function EmailForm({
           </p>
         </div>
         {/* Full Name */}
-        <div className="input-form">
-          <input
-            required
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
-            placeholder="Full Name*"
-          />
-          {nameError && <p className="text-red-500">{nameError}</p>}
-        </div>
+        <input
+          required
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
+          placeholder="Full Name*"
+        />
+        {nameError !== "" ? <ErrorMsg error={nameError} /> : <div />}
+        <div className="mt-4"></div>
         {/* Phone Number */}
-        <div className="input-form">
-          <input
-            required
-            type="tel"
-            pattern="[0-9]*" // Check pattern is phone number
-            value={phoneNum}
-            onChange={(e) => setPhoneNum(e.target.value)}
-            className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
-            placeholder="Phone Number*"
-          />
-          {phoneNumError && <p className="text-red-500">{phoneNumError}</p>}
-        </div>
+        <input
+          required
+          type="tel"
+          pattern="[0-9]*" // Check pattern is phone number
+          value={phoneNum}
+          onChange={(e) => setPhoneNum(e.target.value)}
+          className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
+          placeholder="Phone Number*"
+        />
+        {phoneNumError !== "" ? <ErrorMsg error={phoneNumError} /> : <div />}
+        <div className="mt-4"></div>
         {/* Email */}
-        <div>
-          <input
-            required
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
-            placeholder="Email*"
-          />
-          {emailError && <p className="text-red-500">{emailError}</p>}
-        </div>
+        <input
+          required
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
+          placeholder="Email*"
+        />
+        {emailError !== "" ? <ErrorMsg error={emailError} /> : <div />}
+        <div className="mt-4"></div>
         {/* People */}
-        <div>
+        <input
+          required
+          type="number"
+          value={people}
+          onChange={(e) => setPeople(e.target.value.toString())}
+          className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
+          placeholder="Number of People*"
+        />
+        {peopleError !== "" ? <ErrorMsg error={peopleError} /> : <div />}
+        <div className="mt-4"></div>
+        {/* Branch */}
+        <select
+          className="border border-gray-500  rounded-md w-full mx-auto"
+          value={branch}
+          onChange={(e) => setBranch(e.target.value)}
+        >
+          <option value="">Branch</option>
+          <option value="Lotus Story Sydney Olympic Park">
+            Lotus Story Sydney Olympic Park: 2 Dawn Fraser Ave, Sydney Olympic
+            Park, NSW, Australia, 2127
+          </option>
+          <option value="Lotus Story Ultimo">
+            Lotus Story Ultimo: 1-3 Smail Street, Ultimo, NSW, Australia, 2007
+          </option>
+        </select>
+        {branchError !== "" ? <ErrorMsg error={branchError} /> : <div />}
+        <div className="mt-4"></div>
+        {/* Date */}
+        <h2>Booking Date:</h2>
+        {/* Date Input */}
+        <div className="input-form w-full h-10">
           <input
             required
-            type="number"
-            value={people}
-            onChange={(e) => setPeople(e.target.value.toString())}
+            type="date"
+            value={selectedDate}
+            onChange={handleDateChange}
             className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
-            placeholder="Number of People*"
+            placeholder="Select Date*"
           />
-          {peopleError && <p className="text-red-500">{peopleError}</p>}
         </div>
-        {/* Branch */}
-        <div>
+        {dateError !== "" ? <ErrorMsg error={dateError} /> : <div />}
+        <div className="mt-4"></div>
+        {/* Time */}
+        <h2>Time:</h2>
+        <div className="border border-gray-500  h-11 rounded-md flex justify-center items-center">
           <select
-            className="border border-gray-500 my-3 rounded-md w-full mx-auto"
-            value={branch}
-            onChange={(e) => setBranch(e.target.value)}
+            value={selectedTime}
+            onChange={handleTimeChange}
+            className="w-full "
           >
-            <option value="">Branch</option>
-            <option value="Lotus Story Sydney Olympic Park">
-              Lotus Story Sydney Olympic Park: 2 Dawn Fraser Ave, Sydney Olympic
-              Park, NSW, Australia, 2127
-            </option>
-            <option value="Lotus Story Ultimo">
-              Lotus Story Ultimo: 1-3 Smail Street, Ultimo, NSW, Australia, 2007
-            </option>
+            <option value="">Time</option>
+            {[...Array(8)].map((_, hourIndex) => {
+              const hour = hourIndex + 7;
+              return (
+                <React.Fragment key={hour}>
+                  {[0, 15, 30, 45].map((minute, minuteIndex) => {
+                    return (
+                      <option key={minuteIndex} value={`${hour}:${minute}`}>
+                        {hour.toString().padStart(2, "0")}:
+                        {minute.toString().padStart(2, "0")}
+                      </option>
+                    );
+                  })}
+                </React.Fragment>
+              );
+            })}
           </select>
-          {branchError && <p className="text-red-500">{branchError}</p>}
         </div>
-
-        {/* Date & Time */}
-        <div className="flex flex-row">
-          {/* Date */}
-          <div className="w-2/3 mr-5">
-            <h2>Booking Date:</h2>
-            {/* <div className="border border-gray-500 my-3 rounded-md">
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleDateChange}
-                dateFormat="yyyy/MM/dd"
-                placeholderText="Please select date"
-              />
-            </div> */}
-            {/* Date Input */}
-            <div className="input-form w-full h-10">
-              <input
-                required
-                type="date"
-                value={selectedDate}
-                onChange={handleDateChange}
-                className="mt-1 p-2 w-full rounded-md border border-gray-500 focus:outline-none"
-                placeholder="Select Date*"
-              />
-            </div>
-          </div>
-          {/* Time */}
-          <div className="w-2/3">
-            <h2>Time:</h2>
-            <div className="border border-gray-500  h-11 my-1 rounded-md flex justify-center items-center">
-              <select
-                value={selectedTime}
-                onChange={handleTimeChange}
-                className="w-full "
-              >
-                <option value="">Time</option>
-                {[...Array(8)].map((_, hourIndex) => {
-                  const hour = hourIndex + 7;
-                  return (
-                    <React.Fragment key={hour}>
-                      {[0, 15, 30, 45].map((minute, minuteIndex) => {
-                        return (
-                          <option key={minuteIndex} value={`${hour}:${minute}`}>
-                            {hour.toString().padStart(2, "0")}:
-                            {minute.toString().padStart(2, "0")}
-                          </option>
-                        );
-                      })}
-                    </React.Fragment>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-        </div>
-
+        {timeError !== "" ? <ErrorMsg error={timeError} /> : <div />}
+        <div className="mt-4"></div>
         {/* Option */}
         <div>
           <input
@@ -256,7 +312,7 @@ export function EmailForm({
             onClick={handleBtn}
             className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            {isConfirm ? "Confirm" : "Send Email"}
+            {isConfirm ? "Confirm" : "Reserve"}
           </button>
         </div>
       </div>
