@@ -53,7 +53,7 @@ export default function MenuModal({
         className="w-full p-2  border border-gray-300 rounded-lg shadow-md h-40 flex justify-between text-black"
       >
         <div className="flex flex-col items-start mr-10">
-          <h2 className="text-base font-bold overflow-hidden whitespace-nowrap">
+          <h2 className="text-base font-bold overflow-hidden whitespace-normal">
             {truncate(name, 8)}
           </h2>
           <p className="text-gray-500">{description}</p>
