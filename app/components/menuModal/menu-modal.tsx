@@ -50,21 +50,28 @@ export default function MenuModal({
     <div>
       <Button
         onClick={handleOpen}
-        className="w-full p-2  border border-gray-300 rounded-lg shadow-md h-40 flex justify-between text-black"
+        className="w-full border border-gray-300 rounded-lg shadow-md"
       >
-        <div className="flex flex-col items-start mr-10">
-          <h2 className="text-base font-bold overflow-hidden whitespace-normal">
-            {truncate(name, 8)}
-          </h2>
-          <p className="text-gray-500">{description}</p>
-          <p className="text-sm">${price}</p>
-        </div>
-        <div className="flex flex-col h-full">
-          <img
-            src={imageSrc}
-            // alt="Image description"
-            className="w-auto h-full"
-          />
+        <div className="w-full h-40  flex justify-between ">
+          <div className="flex flex-col justify-between items-start mr-10">
+            <div className="flex flex-col items-start ">
+              <h2 className="text-base font-bold overflow-hidden whitespace-normal text-black">
+                {truncate(name, 8)}
+              </h2>
+              <p className="text-gray-500 text-left text-black">
+                {truncate(description, 18)}
+              </p>
+            </div>
+            <p className="text-sm text-black">${price}</p>
+          </div>
+
+          <div className="flex flex-col h-full">
+            <img
+              src={imageSrc}
+              // alt="Image description"
+              className="w-auto h-full"
+            />
+          </div>
         </div>
       </Button>
 

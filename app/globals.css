@@ -93,6 +93,7 @@ body {
 .Button {
   font-family: "DIN-Light";
   font-weight: normal;
+  color: black;
 }
 
 @media (max-width: 676px) {
