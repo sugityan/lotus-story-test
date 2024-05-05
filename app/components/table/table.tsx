@@ -53,7 +53,9 @@ export function MenuTable() {
                   <TableRow key={itemIndex}>
                     <TableCell>
                       <h2 className="font-bold">{menuItem.name}</h2>
-                      <p className="text-gray-500">{menuItem.description}</p>
+                      <p className="text-gray-500  whitespace-nowrap">
+                        {menuItem.description}
+                      </p>
                     </TableCell>
                     <TableCell>
                       <p className="font-bold">{menuItem.price}</p>

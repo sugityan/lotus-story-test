@@ -10,11 +10,13 @@ const style = {
 
 export default function MenuModal({
   name,
+  description,
   price,
   imageSrc,
   onSubmit,
 }: {
   name: string;
+  description: string;
   price: number;
   imageSrc: string;
   onSubmit: (value: any) => void;
@@ -38,20 +40,29 @@ export default function MenuModal({
     // return console.log(data);
   };
 
+  function truncate(text: string, maxLength: number) {
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  }
+
   return (
     <div>
       <Button
         onClick={handleOpen}
         className="w-full p-2  border border-gray-300 rounded-lg shadow-md h-40 flex justify-between text-black"
       >
-        <div className="flex flex-col items-start">
-          <h2 className="text-lg font-bold">{name}</h2>
+        <div className="flex flex-col items-start mr-10">
+          <h2 className="text-base font-bold overflow-hidden whitespace-nowrap">
+            {truncate(name, 8)}
+          </h2>
+          <p className="text-gray-500">{description}</p>
           <p className="text-sm">${price}</p>
         </div>
         <div className="flex flex-col h-full">
           <img
             src={imageSrc}
-            alt="Image description"
+            // alt="Image description"
             className="w-auto h-full"
           />
         </div>

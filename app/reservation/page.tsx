@@ -197,9 +197,13 @@ export default function ReservationPage() {
             <h4 className="text-xl font-extrabold mt-5">{menuGroup?.label}</h4>
             <div className="flex flex-wrap">
               {menuGroup?.menus.map((menuItem, itemIndex) => (
-                <div key={itemIndex} className="w-1/3 px-2">
+                <div
+                  key={itemIndex}
+                  className="w-full md:w-1/2 lg:w-1/3 px-2 mt-5"
+                >
                   <MenuModal
                     name={menuItem.name}
+                    description={menuItem.description!}
                     price={parseInt(menuItem.price)}
                     imageSrc={menuItem.imgSrc}
                     onSubmit={(data) =>
@@ -218,7 +222,7 @@ export default function ReservationPage() {
           </div>
         ))}
       </div>
-
+      <div className="mt-10"></div>
       <EmailForm orders={orders} isConfirm={true} />
     </div>
   );
