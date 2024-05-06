@@ -136,10 +136,7 @@ export default function ConfirmationModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={style}
-          // className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-black shadow-md p-4  overflow-y-scroll bg-white"
-        >
+        <Box sx={style}>
           <div className="font-bold text-center pb-2 border-b mb-2 overflow-y-scroll">
             <div className="">
               <div className="">
