@@ -94,7 +94,6 @@ export function EmailForm({
       selectedDate != "" &&
       selectedTime != ""
     ) {
-      console.log("ok");
       if (isConfirm) {
         setIsConModalOpen(true);
         console.log("open confirm");
@@ -128,10 +127,9 @@ export function EmailForm({
           setOption("");
           setIsSucModalOpen(true);
         } catch (e) {
+          console.log("something wrong");
           console.error(e);
         }
-
-        console.log("Send Email");
       }
     } else {
       console.log("Something wrong");
