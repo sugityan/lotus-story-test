@@ -194,7 +194,9 @@ export default function ReservationPage() {
       <div className="w-full">
         {tabs[activeTab].Menu.map((menuGroup, groupIndex) => (
           <div key={groupIndex}>
-            <h4 className="text-xl font-extrabold mt-5">{menuGroup?.label}</h4>
+            <h4 className="text-3xl font-extrabold mt-10">
+              {menuGroup?.label}
+            </h4>
             <div className="flex flex-wrap ">
               {menuGroup?.menus.map((menuItem, itemIndex) => (
                 <div

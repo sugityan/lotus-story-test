@@ -55,8 +55,8 @@ export default function MenuModal({
         <div className="w-full h-40  flex justify-between ">
           <div className="flex flex-col justify-between items-start mr-10">
             <div className="flex flex-col items-start ">
-              <h2 className="text-base font-bold overflow-hidden whitespace-normal text-black">
-                {truncate(name, 8)}
+              <h2 className="text-base font-bold overflow-hidden whitespace-normal text-black truncate">
+                {truncate(name, 16)}
               </h2>
               <p className="text-gray-500 text-left text-black">
                 {description != null ? truncate(description, 18) : ""}

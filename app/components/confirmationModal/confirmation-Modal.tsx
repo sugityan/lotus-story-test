@@ -118,6 +118,7 @@ export default function ConfirmationModal({
       setSelectedTime("");
       setOption("");
       setIsSucModalOpen(true);
+      setIsOpen(false);
     } catch (e) {
       console.error(e);
     }

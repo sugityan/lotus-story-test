@@ -118,6 +118,7 @@ export function EmailForm({
               option,
             }),
           });
+
           setName("");
           setPhoneNum("");
           setEmail("");
