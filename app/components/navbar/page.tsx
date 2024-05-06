@@ -26,7 +26,7 @@ export default function Navbar() {
             <div className="flex items-center" id="logo">
               <Link href="/">
                 <img
-                  className="w-2/3"
+                  className="w-1/2 lg:w-1/3"
                   src="/lotus-story-logo.png"
                   alt="Image"
                 />
