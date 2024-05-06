@@ -98,6 +98,7 @@ export function EmailForm({
         setIsConModalOpen(true);
         console.log("open confirm");
       } else {
+        console.log("email");
         try {
           await fetch("/api/email", {
             method: "POST",

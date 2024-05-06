@@ -16,6 +16,8 @@ export async function POST(request) {
     option,
   } = res;
 
+  console.log("This is emailAddress", emailAddress);
+
   client.sendEmailWithTemplate({
     TemplateId: "35422061",
     From: emailAddress,
